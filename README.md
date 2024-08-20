@@ -162,7 +162,7 @@ ___
 
 ![Схема тоннеля IPSec](/Lesson_6/%D0%94%D0%97%206%20%D1%81%D1%85%D0%B5%D0%BC%D0%B0%20%D1%82%D0%BE%D0%BD%D0%BD%D0%B5%D0%BB%D1%8F.png)
 
-<details><summary>Этапы подключения IKE Phase 1</summary>
+Этапы подключения IKE Phase 1
 
 Step 1 : Negotiation
 
@@ -182,7 +182,7 @@ Step 3: Authentication
 
 The last step is that the two peers will authenticate each other using the authentication method that they agreed upon on in the negotiation. When the authentication is successful, we have completed IKE phase 1. The end result is a IKE phase 1 tunnel (aka ISAKMP tunnel) which is bidirectional. This means that both peers can send and receive on this tunnel.
 
-</details>
+
 
 Фаза 1 может проходить в двух режимах:
 
@@ -193,7 +193,7 @@ Main mode - данный режим проходит за 6 обменов со�
 
 Aggressive mode - в данном режиме для поднятия канала необходимо 3 сообщения, но является менее безопасным, так как большее количество информации передается открытым кодом.
 
-<details><summary>Этапы подключения IKE Phase 2</summary>
+Этапы подключения IKE Phase 2
 
 Just like in IKE phase 1, our peers will negotiate about a number of items:
 
@@ -204,7 +204,6 @@ Just like in IKE phase 1, our peers will negotiate about a number of items:
 - Lifetime: how long is the IKE phase 2 tunnel valid? When the tunnel is about to expire, we will refresh the keying material.
 - (Optional) DH exchange: used for PFS (Perfect Forward Secrecy).
 
-</details>
 
 Информация которая передается через канал IPSec может шифроваться двумя способами:
 
