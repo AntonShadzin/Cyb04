@@ -4,7 +4,7 @@
 
 
 
-<details><summary>Занятие №1</summary>
+<details><summary>Занятие №1 Введение</summary>
 
 ___
 > Скачать и установить VirtialBox
@@ -18,7 +18,7 @@ ___
 
 </details>
 
-<details><summary>Занятие №2</summary>
+<details><summary>Занятие №2 Virtualbox</summary>
 
 ___
 > Создать 3 виртуальные машины в VirtualBox и обеспечить сетевую связность
@@ -31,7 +31,7 @@ ___
 </details>
 
 
-<details><summary>Занятие №3</summary>
+<details><summary>Занятие №3 Kali(Bruteforce)</summary>
 
 ___
 > На машинах с системами Windows Server 2019 и 10 установить и включить SSH, включить RDP. С машины Kali Linux провести сканирование сети. 
@@ -81,7 +81,7 @@ ___
 
 </details>
 
-<details><summary>Занятие №4</summary>
+<details><summary>Занятие №4 Основы сетей</summary>
 
 ___
 > Проработать и изучить модель OSI
@@ -110,7 +110,7 @@ ___
 </details>
 
 
-<details><summary>Занятие №5</summary>
+<details><summary>Занятие №5 Cisco packet tracer</summary>
 
 ___
 > Зайти в настройки домашнего роутера.	Изучить настройки, сделать скрины настройки проброса портов приложений (на примере если бы вы хотели открыть доступ к домашнему веб-серверу).
@@ -145,5 +145,81 @@ ___
 ![Serv](/Lesson_5/%D0%94%D0%97%205%20serv.png)
 
 ![NAT](/Lesson_5/%D0%94%D0%97%205%20nat.png)
+
+</details>
+
+<details><summary>Занятие №6 Криптография</summary>
+
+___
+> Схема работы IPSec
+___
+
+Протоколы, которые используются при создании защищенного канала:
+
+![Протоколы](/Lesson_6/%D0%94%D0%97%206%20ipsecprotocols.png)
+
+Схема создания IPSec тоннеля:
+
+![Схема тоннеля IPSec](/Lesson_6/%D0%94%D0%97%206%20%D1%81%D1%85%D0%B5%D0%BC%D0%B0%20%D1%82%D0%BE%D0%BD%D0%BD%D0%B5%D0%BB%D1%8F.png)
+
+<details><summary>Этапы подключения IKE Phase 1</summary>
+
+Step 1 : Negotiation
+
+The peer that has traffic that should be protected will initiate the IKE phase 1 negotiation. The two peers will negotiate about the following items:
+
+-  Hashing: we use a hashing algorithm to verify the integrity, we use MD5 or SHA for this.
+- Authentication: each peer has to prove who he is. Two commonly used options are a pre-shared key or digital certificates.
+- DH (Diffie Hellman) group: the DH group determines the strength of the key that is used in the key exchange process. The higher group numbers are more secure but take longer to compute.
+- Lifetime: how long does the IKE phase 1 tunnel stand up? the shorter the lifetime, the more secure it is because rebuilding it means we will also use new keying material. Each vendor uses a different lifetime, a common default value is 86400 seconds (1 day).
+- Encryption: what algorithm do we use for encryption? For example, DES, 3DES or AES.
+
+Step 2: DH Key Exchange
+
+Once the negotiation has succeeded, the two peers will know what policy to use. They will now use the DH group that they negotiated to exchange keying material. The end result will be that both peers will have a shared key.
+
+Step 3: Authentication
+
+The last step is that the two peers will authenticate each other using the authentication method that they agreed upon on in the negotiation. When the authentication is successful, we have completed IKE phase 1. The end result is a IKE phase 1 tunnel (aka ISAKMP tunnel) which is bidirectional. This means that both peers can send and receive on this tunnel.
+
+</details>
+
+Фаза 1 может проходить в двух режимах:
+
+1. Main mode
+2. Aggressive mode
+
+Main mode - данный режим проходит за 6 обменов сообщениями (сообщение с настройками и подтверждение от другой стороны) и считается более безопасным так как меньше информации передается открытым кодом.
+
+Aggressive mode - в данном режиме для поднятия канала необходимо 3 сообщения, но является менее безопасным, так как большее количество информации передается открытым кодом.
+
+<details><summary>Этапы подключения IKE Phase 2</summary>
+
+Just like in IKE phase 1, our peers will negotiate about a number of items:
+
+- IPsec Protocol: do we use AH or ESP?
+- Encapsulation Mode: transport or tunnel mode?
+- Encryption: what encryption algorithm do we use? DES, 3DES or AES?
+- Authentication: what authentication algorithm do we use? MD5 or SHA?
+- Lifetime: how long is the IKE phase 2 tunnel valid? When the tunnel is about to expire, we will refresh the keying material.
+- (Optional) DH exchange: used for PFS (Perfect Forward Secrecy).
+
+</details>
+
+Информация которая передается через канал IPSec может шифроваться двумя способами:
+
+1. AH (Authentication Header) шифрование заголовка  
+2. ESP (Encapsulating Security Payload) шифрование содержимого
+
+Оба протокола поддерживают 2 режима:
+
+- Transport mode (не скрывает оригинальный IP отправителя)
+- Tunnel mode (скрывает оригинальный IP отправителя)
+
+![AH](/Lesson_6/%D0%94%D0%97%206%20AH.png)
+
+![ESP](/Lesson_6/%D0%94%D0%97%206%20ESP.png)
+
+![AH+ESP](/Lesson_6/%D0%94%D0%97%206%20ESP.png)
 
 </details>
