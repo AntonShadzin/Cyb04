@@ -324,7 +324,21 @@ ___
 > Лабораторные работы по OWASP TOP 10.
 ___
 
+Оговорюсь сразу: решал по примеру из видео.
+ 1. Lab Broken Access Controll 1
 
+![Lab1](/Lesson_7/%D0%94%D0%97%207%20lab1.png)
+ 
+ 2. Lab Broken Access Controll 2
 
+![Lab2](/Lesson_7/%D0%94%D0%97%207%20lab2.png)
+
+ 3. Lab Injection 1
+
+ ![Lab3](/Lesson_7/%D0%94%D0%97%207%20lab3.png)
+
+ 4. Lab SSRF 1
+
+![Lab4](/Lesson_7/%D0%94%D0%97%207%20lab4.png)
 
 </details>
