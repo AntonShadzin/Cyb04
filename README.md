@@ -409,7 +409,7 @@ sudo docker run -d -p 80:3000 bkimminich/juice-shop
 
 Заходим на ВМ с которой будем производить DoS атаку. В нашем случае это будет ВМ Kali. Пробуем открыть в браузере Juice Shop (в поисковой строке вводим IP-адрес ВМ Ubuntu). 
 
-![Проверка Docker](/Lesson_8/%D0%94%D0%97%208%20befor.png)
+![Проверка Docker](/Lesson_8/%D0%94%D0%97%208%20before.png)
 
 Далее переходим на [git xerxes](https://github.com/XCHADXFAQ77X/XERXES) качаем исолняемый файл и запускаем его.
 
