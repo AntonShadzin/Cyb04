@@ -531,11 +531,11 @@ Cхема инфраструктуры:
 
 Экспортированный EXEL-файл со всеми таблицами:
 
-![Exel1](Lesson_10-11/summary%20(1).xlsx)
+[Mitre Att&ck](Lesson_10-11/summary%20(1).xlsx)
 
 Минимальный набор техник реагирования для нашей системы:
 
-![Exel2](Lesson_10-11/RE%26CT_Enterprise_Matrix.xlsx)
+[Mitre React](Lesson_10-11/RE%26CT_Enterprise_Matrix.xlsx)
 
 
 
