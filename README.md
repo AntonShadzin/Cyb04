@@ -560,11 +560,10 @@ ___
 
  - [ ] [NIST 800-53 Security and Privacy Controls for Information Systems and Organizations](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
 
+___
+> Создать план личного развития и роста в ИБ согласно Cybersecurity Roadmap 
+___
 
-Минимальный набор техник реагирования для нашей системы:
-
-[Mitre React](Lesson_10-11/RE%26CT_Enterprise_Matrix.xlsx)
-
-
+[Cybersecurity Roadmap](https://roadmap.sh/cyber-security?s=66e2987012af4935a0b6cf17)
 
 </details>
