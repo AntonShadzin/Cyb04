@@ -548,13 +548,13 @@ ___
 > Ознакомиться с документацией и стандартами в области ИБ
 ___
 
- - [ ] [Приказ ОАЦ №40 (Кибербез)](https://president.gov.by/fp/v1/508/document-thumb__45508__original/45508.1676445432.32ffad2142.pdf)
+ - [X] [Приказ ОАЦ №40 (Кибербез)](https://president.gov.by/fp/v1/508/document-thumb__45508__original/45508.1676445432.32ffad2142.pdf)
 
- - [ ] [Приказ ОАЦ №130 (Кибербез)](https://www.oac.gov.by/public/content/files/files/law/prikaz-oac/2023%20-%20130.pdf)
+ - [X] [Приказ ОАЦ №130 (Кибербез)](https://www.oac.gov.by/public/content/files/files/law/prikaz-oac/2023%20-%20130.pdf)
 
- - [ ] [Приказ ОАЦ №66 (Системы защиты информации)](https://www.oac.gov.by/public/content/files/files/law/prikaz-oac/2020%20-%2066.pdf)
+ - [X] [Приказ ОАЦ №66 (Системы защиты информации)](https://www.oac.gov.by/public/content/files/files/law/prikaz-oac/2020%20-%2066.pdf)
 
- - [ ] [ISO 27001 чеклист](https://www.smartsheet.com/sites/default/files/2020-06/IC-ISO-27001-Checklist-10838_PDF.pdf)
+ - [X] [ISO 27001 чеклист](https://www.smartsheet.com/sites/default/files/2020-06/IC-ISO-27001-Checklist-10838_PDF.pdf)
 
  - [ ] [ISO 27001 implementation guide](https://issuu.com/public-it/docs/certikit_iso27001_implementation_guide_v12?fr=sNDdiNjQyMzg4ODg)
 
