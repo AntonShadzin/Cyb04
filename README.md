@@ -624,6 +624,12 @@ ___
 
 ![Слайд 28_2](/Lesson_13/%D0%94%D0%97%2013%2028_2.png)
 
+!Важно. По умолчанию на системе Windows server отсутствует утилита BitLocker. Ее можно установить при помощи команды в PowerShell
+
+```PowerShell
+Install-WindowsFeature BitLocker -IncludeAllSubFeature -IncludeManagementTools -Restart
+```
+
  7. Включить брандмауэр и настроить логирование
 
 ![Слайд 29_1](/Lesson_13/%D0%94%D0%97%2013%2029_1.png)
