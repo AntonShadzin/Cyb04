@@ -629,9 +629,38 @@ ___
 ![Слайд 29_1](/Lesson_13/%D0%94%D0%97%2013%2029_1.png)
 
 ___
-> Создать план личного развития и роста в ИБ согласно Cybersecurity Roadmap 
+> Добавить роль контроллера домена Active Directory
 ___
 
-[Cybersecurity Roadmap](https://roadmap.sh/cyber-security?s=66e2987012af4935a0b6cf17)
+![AD](/Lesson_13/%D0%94%D0%97%2013%20ad.png)
+
+___
+> Настроить службу DNS
+___
+
+Служба DNS насроена. Прямые и обратные А-записи добавлены:
+
+![DNS](/Lesson_13/%D0%94%D0%97%2013%20dns%201.png)
+
+Команды dig и ping по доменному имени:
+
+![Dig](/Lesson_13/%D0%94%D0%97%2013%20dns%20dig.png)
+
+![Ping linux](/Lesson_13/%D0%94%D0%97%2013%20dns%20ping.png)
+
+!Важно. На Debian-подобных системах DNS-сервер прописывается в /etc/resolv.conf
+
+```bash
+sudo nano /etc/resolv.conf
+```
+
+Ping по доменному имени с ВМ Win10 до ввода в домен:
+
+![Ping win](/Lesson_13/%D0%94%D0%97%2013%20dns%20ping%202.png)
+
+Ping по доменному имени с ВМ Win10 после ввода в домен:
+
+![Ping win](/Lesson_13/%D0%94%D0%97%2013%20dns%20ping%203.png)
+
 
 </details>
