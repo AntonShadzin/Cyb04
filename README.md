@@ -670,3 +670,88 @@ Ping по доменному имени с ВМ Win10 после ввода в �
 
 
 </details>
+
+
+<details><summary>Занятие №14 Безопасность Linux OS</summary>
+
+___
+> BIOS/UEFI + парольную политику (слайд 26-30)
+___
+
+Настройка системы Lunux согласно требованиям слайдов:
+
+ 1. Настройка устройства. BIOS и TPM
+
+ Работа проводится на ВМ которая развернута на гипервизоре Virtualbox, поэтому нетвозможности провести настройку BIOS
+
+ 2. Установка новой ОС с форматированием дисков и настройкой шифрования 
+
+![Слайд 27_1](/Lesson_14/%D0%94%D0%97%2014%2027_1.png)
+
+ 3. Настройка выполнения парольной политики
+
+![Слайд 28_1](/Lesson_14/%D0%94%D0%97%2014%2028_1.png)
+
+![Слайд 29_1](/Lesson_14/%D0%94%D0%97%2014%2029_1.png)
+
+![Слайд 30_1](/Lesson_14/%D0%94%D0%97%2014%2030_1.png)
+
+ 4. Настройка SSH-сервера
+
+ Выполнялось ранее
+
+![Слайд 32_1](/Lesson_14/%D0%94%D0%97%2014%2032_1.png)
+
+ 5. Настроить iptables правила в виде файла скрипта *.sh
+
+![iptables_1](/Lesson_14/%D0%94%D0%97%2014%20iptables_1.png)
+
+![iptables_2](/Lesson_14/%D0%94%D0%97%2014%20iptables_2.png)
+
+ ```bash
+
+#!/bin/bash
+
+iptables -A OUTPUT -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p udp --dport 80 -j ACCEPT
+iptables -A INPUT -p udp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp -s 10.10.0.0/24 --dport ssh -j ACCEPT
+iptables -P INPUT DROP
+
+echo "1" > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
+iptables -A FORWARD -t ent0s3 -j ACCEPT
+ 
+ ```
+
+ 6. Очистить все правила iptables, установить UFW firewall
+
+ ```bash 
+
+ iptables -F
+
+ ```
+
+![Слайд ufw_1](/Lesson_14/%D0%94%D0%97%2014%20ufw_2.png)
+
+![Слайд ufw_2](/Lesson_14/%D0%94%D0%97%2014%20ufw_3.png)
+
+![Слайд ufw_3](/Lesson_14/%D0%94%D0%97%2014%20ufw_4.png)
+
+ ```bash
+ #!/bin/bash
+
+ ufw enable
+
+ ufw allo from any to any proto tcp port 80,443
+ ufw allo from any to any proto tcp port 80,443
+ ufw allo from 10.10.0.0/24 to any app OpenSSH
+
+ ufw route allow in on enp0s3 out on enp0s8 to any from any
+
+ ```
+
+
+</details>
