@@ -792,6 +792,4 @@ gpresult /r /scope:computer
  ![GPO_4](/Lesson_15-16/gpo4.png)
 
 
- 
-
 </details>
