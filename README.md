@@ -793,3 +793,70 @@ gpresult /r /scope:computer
 
 
 </details>
+
+
+<details><summary>Занятие №17 Защита инфраструктуры приложений</summary>
+
+___
+> Исследуем Docker
+___
+
+ 1. Скачать образ ubuntu:18.04 c hub.docker.io, проверить целостность и соответствие контрольной суммы образа SHA256
+
+ ```bash
+
+ sudo docker pull ubuntu:18.04
+
+ sudo docker image ls
+
+ sudo docker inspect ubuntu:18.04
+
+ ```
+
+ ![Inspect image](/Lesson_17/%D0%94%D0%97_17_1.png)
+
+ 2. С помощью команды docker image ls отобразить все docker образы на системе, добавить в группу docker вашего пользователя для запуска команд docker без sudo
+ 
+ Добавляем в группу docker вашего пользователя для запуска команд docker без sudo
+
+ ```bash
+
+ # добавляем группу docker, если надо
+ sudo addgroup docker
+
+ # добавляем пользователя в группу docker
+ sudo gpasswd -a $USER docker
+
+ # чтобы применить изменения необходимо перезайти в систему либо выполнить команду
+ sudo newgrp docker
+
+ # проверяем
+ docker run hello-world
+
+ ```
+
+ ![Docker whithout sudo](/Lesson_17/%D0%94%D0%97_17_2.png)
+
+ 3. Запустить данный образ в интерактивном режиме в оболочке sh docker run -it <image name> sh
+
+ ![Docker run image](/Lesson_17/%D0%94%D0%97_17_3.png)
+
+ 4. Запустить контейнер под пользователем tms. Внутри контейнера выполнить команду whoami для определения пользователя под которым вы запустили контейнер
+
+ Запуск контейнера под хостовым пользователем
+
+ ```bash
+ 
+ # -it -v /etc/passwd:/etc/passwd - указываем хост файл с паролями как войлюм 
+ # -u 'id -u':'id -d' - указываем параметры текущего хостового пользователя
+ # -v 'pwd':'pwd' - применяем как доступный вольюм домашнюю папку хост-юзера
+ # -w 'pwd' - создаем домашнюю директорию на гостевой машине по пути домашней директории хост-юзера
+ docker run -it -v /etc/passwd:/etc/passwd -u 'id -u':'id -d' -v 'pwd':'pwd' -w 'pwd' ubuntu:18.04 sh
+
+ ```
+
+ ![Tms user](/Lesson_17/%D0%94%D0%97_17_4.png)
+
+
+
+</details>
