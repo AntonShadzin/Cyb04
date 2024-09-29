@@ -848,15 +848,62 @@ ___
  ```bash
  
  # -it -v /etc/passwd:/etc/passwd - указываем хост файл с паролями как войлюм 
- # -u 'id -u':'id -d' - указываем параметры текущего хостового пользователя
+ # -u 'id -u':'id -g' - указываем параметры текущего хостового пользователя
  # -v 'pwd':'pwd' - применяем как доступный вольюм домашнюю папку хост-юзера
  # -w 'pwd' - создаем домашнюю директорию на гостевой машине по пути домашней директории хост-юзера
- docker run -it -v /etc/passwd:/etc/passwd -u 'id -u':'id -d' -v 'pwd':'pwd' -w 'pwd' ubuntu:18.04 sh
+ docker run -it -v /etc/passwd:/etc/passwd -u 'id -u':'id -g' -v 'pwd':'pwd' -w 'pwd' ubuntu:18.04 sh
 
  ```
 
  ![Tms user](/Lesson_17/%D0%94%D0%97_17_4.png)
 
+ 5. Прогнать образ через один из сканеров безопасности проанализировать результаты
 
+ Для проверки на уязвимости был выбран сканер [https://github.com/quay/clair](https://github.com/quay/clair) по причине более понятных мануалов по установке и использованию
+ 
+  Установка [https://aquasecurity.github.io/trivy/v0.55/getting-started/installation/](https://aquasecurity.github.io/trivy/v0.55/getting-started/installation/)
+
+ ```bash
+
+ sudo apt-get install wget apt-transport-https gnupg
+
+ wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+
+ echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+
+ sudo apt-get update
+
+ sudo apt-get install trivy
+
+ ```
+ Пример использования
+
+ ```bash
+
+ sudo trivy image ubuntu:18.04
+
+ ```
+ 
+ Проверка на наличие уязвимостей docker image ubuntu:18.04
+
+ ![ubuntu:18.04](/Lesson_17/%D0%94%D0%97_17_5_1.png)
+
+ Проверка на наличие уязвимостей docker image juice shop
+
+ ![juice_shop_1](/Lesson_17/%D0%94%D0%97_17_5_2.png)
+
+ ![juice_shop_2](/Lesson_17/%D0%94%D0%97_17_5_3.png)
+
+___
+> Пишем Dockerfile
+___
+
+ [Создание Dockerfile ](https://admin812.ru/kak-sozdat-obraz-docker-s-pomoshhyu-dockerfile-v-ubuntu-20-04-lts.html)
+
+ [Настройка конфигурации nginx](https://serverspace.ru/support/help/ustanovka-i-zapusk-nginx-v-docker-kontejnere-na-ubuntu/?utm_source=google.com&utm_medium=organic&utm_campaign=google.com&utm_referrer=google.com)
+
+ Результат:
+
+ ![Nginx](/Lesson_17/%D0%94%D0%97_17_6_1.png)
 
 </details>
