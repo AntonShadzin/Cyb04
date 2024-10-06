@@ -907,3 +907,58 @@ ___
  ![Nginx](/Lesson_17/%D0%94%D0%97_17_6_1.png)
 
 </details>
+
+
+<details><summary>Занятие №18 Защита инфраструктуры приложений</summary>
+
+___
+> Установить 2FA на linux (Google authenticator)
+___
+
+ [Мануал настройки Google Authenticator](https://www.linuxbabe.com/ubuntu/two-factor-authentication-ssh-key-ubuntu)
+
+ ![2FA](/Lesson_18/%D0%94%D0%97%2018_1.jpg)
+
+ 
+ ___
+> Online песочница any.run
+___
+ 
+ ![any.run](/Lesson_18/%D0%94%D0%97%2018_2.jpg)
+
+ 
+</details>
+
+
+
+<details><summary>Занятие №19 Основные виды СЗИ</summary>
+
+___
+> Установить антивирус ClamAV
+___
+
+
+ Cлайды 45-48
+
+ [Мануал ClamAV](/Lesson_19/19_szi.pdf)
+ 
+ ![ClamAV](/Lesson_19/%D0%94%D0%97_19_1.png)
+
+___
+> Установить YARA
+___
+ 
+ [Мануал по установке YARA](https://yara.readthedocs.io/en/latest/gettingstarted.html)
+
+ [Мануал по запуску YARA](https://yara.readthedocs.io/en/stable/commandline.html)
+
+ ![YARA_target](/Lesson_19/%D0%94%D0%97_19_2_1.png)
+ 
+ ![YARA_rule_&_scan](/Lesson_19/%D0%94%D0%97_19_2_2.png)
+
+___
+> Установить WAF (nginx + Modsecurity)
+___
+ 
+ 
+</details>
