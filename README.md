@@ -985,7 +985,7 @@ ___
 
  ![suricata.yaml_1](/Lesson_20/%D0%94%D0%97_20_yaml_1.png)
 
- ![suricata.yaml_2](/Lesson_20/%D0%94%D0%97_20_yaml_1.png)
+ ![suricata.yaml_2](/Lesson_20/%D0%94%D0%97_20_yaml_2.png)
 
  Кастомные правила для определения работы nmap
 
