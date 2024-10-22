@@ -1019,3 +1019,168 @@ ___
  ![Medusa после](/Lesson_20/%D0%94%D0%97_20_m_2.png)
 
 </details>
+
+<details><summary>Занятие №20 Основные виды СЗИ </summary>
+
+___
+> Установка и тестирование Suricata IDS
+___
+
+ [Мануал установки и настройки Suricata (стр. 23-39)](/Lesson_20/20_SZI.pdf)
+
+ [Git с правилами на детектирование разных режимов работы сетевого сканера nmap](https://github.com/aleksibovellan/opnsense-suricata-nmaps)
+
+ Конфиг suricata (/etc/suricata/suricata.yaml)
+
+ ![suricata.yaml_1](/Lesson_20/%D0%94%D0%97_20_yaml_1.png)
+
+ ![suricata.yaml_2](/Lesson_20/%D0%94%D0%97_20_yaml_2.png)
+
+ Кастомные правила для определения работы nmap
+
+ ![local.rules](/Lesson_20/%D0%94%D0%97_20_rules_1.png)
+
+ Лог сработки правила (/var/log/suricata/fast.log)
+
+ ![local.rules](/Lesson_20/%D0%94%D0%97_20_log_1.png)
+___
+> Тест работы fail2ban
+___
+ 
+ [Мануал установки и настройки Suricata (стр. 13-16)](/Lesson_20/20_SZI.pdf)
+
+ Логи fail2ban (блокировка по умолчанию осуществляется на 10 минут) /var/log/fail2ban.log
+
+ ![fail2ban.log_1](/Lesson_20/%D0%94%D0%97_20_f2b_1.png)
+
+ ![fail2ban.log_2](/Lesson_20/%D0%94%D0%97_20_f2b_2.png)
+
+ Брутфорс при помощи Hydra до начала работы fail2ban и после начала работы fail2ban
+
+ ![Hydra до](/Lesson_20/%D0%94%D0%97_20_h_1.png)
+
+ ![Hydra после](/Lesson_20/%D0%94%D0%97_20_h_2.png)
+
+ Брутфорс при помощи Medusa до начала работы fail2ban и после начала работы fail2ban
+
+ ![Medusa до](/Lesson_20/%D0%94%D0%97_20_m_1.png)
+
+ ![Medusa после](/Lesson_20/%D0%94%D0%97_20_m_2.png)
+
+</details>
+
+
+
+<details><summary>Занятие №21 Audit </summary>
+
+___
+> Ознакомление с документацией
+___
+
+ [NIST standards docs](https://csrc.nist.gov/publications/sp800)
+
+ [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
+
+ [CIS рекомендации](https://www.cisecurity.org/cis-benchmarks)
+
+ [PCI DSS библиотека](https://www.pcisecuritystandards.org/document_library/)
+
+</details>
+
+
+
+<details><summary>Занятие №20 Основные виды СЗИ </summary>
+
+___
+> Установка и тестирование Suricata IDS
+___
+
+ [Мануал установки и настройки Suricata (стр. 23-39)](/Lesson_20/20_SZI.pdf)
+
+ [Git с правилами на детектирование разных режимов работы сетевого сканера nmap](https://github.com/aleksibovellan/opnsense-suricata-nmaps)
+
+ Конфиг suricata (/etc/suricata/suricata.yaml)
+
+ ![suricata.yaml_1](/Lesson_20/%D0%94%D0%97_20_yaml_1.png)
+
+ ![suricata.yaml_2](/Lesson_20/%D0%94%D0%97_20_yaml_2.png)
+
+ Кастомные правила для определения работы nmap
+
+ ![local.rules](/Lesson_20/%D0%94%D0%97_20_rules_1.png)
+
+ Лог сработки правила (/var/log/suricata/fast.log)
+
+ ![local.rules](/Lesson_20/%D0%94%D0%97_20_log_1.png)
+___
+> Тест работы fail2ban
+___
+ 
+ [Мануал установки и настройки Suricata (стр. 13-16)](/Lesson_20/20_SZI.pdf)
+
+ Логи fail2ban (блокировка по умолчанию осуществляется на 10 минут) /var/log/fail2ban.log
+
+ ![fail2ban.log_1](/Lesson_20/%D0%94%D0%97_20_f2b_1.png)
+
+ ![fail2ban.log_2](/Lesson_20/%D0%94%D0%97_20_f2b_2.png)
+
+ Брутфорс при помощи Hydra до начала работы fail2ban и после начала работы fail2ban
+
+ ![Hydra до](/Lesson_20/%D0%94%D0%97_20_h_1.png)
+
+ ![Hydra после](/Lesson_20/%D0%94%D0%97_20_h_2.png)
+
+ Брутфорс при помощи Medusa до начала работы fail2ban и после начала работы fail2ban
+
+ ![Medusa до](/Lesson_20/%D0%94%D0%97_20_m_1.png)
+
+ ![Medusa после](/Lesson_20/%D0%94%D0%97_20_m_2.png)
+
+</details><details><summary>Занятие №20 Основные виды СЗИ </summary>
+
+___
+> Установка и тестирование Suricata IDS
+___
+
+ [Мануал установки и настройки Suricata (стр. 23-39)](/Lesson_20/20_SZI.pdf)
+
+ [Git с правилами на детектирование разных режимов работы сетевого сканера nmap](https://github.com/aleksibovellan/opnsense-suricata-nmaps)
+
+ Конфиг suricata (/etc/suricata/suricata.yaml)
+
+ ![suricata.yaml_1](/Lesson_20/%D0%94%D0%97_20_yaml_1.png)
+
+ ![suricata.yaml_2](/Lesson_20/%D0%94%D0%97_20_yaml_2.png)
+
+ Кастомные правила для определения работы nmap
+
+ ![local.rules](/Lesson_20/%D0%94%D0%97_20_rules_1.png)
+
+ Лог сработки правила (/var/log/suricata/fast.log)
+
+ ![local.rules](/Lesson_20/%D0%94%D0%97_20_log_1.png)
+___
+> Тест работы fail2ban
+___
+ 
+ [Мануал установки и настройки Suricata (стр. 13-16)](/Lesson_20/20_SZI.pdf)
+
+ Логи fail2ban (блокировка по умолчанию осуществляется на 10 минут) /var/log/fail2ban.log
+
+ ![fail2ban.log_1](/Lesson_20/%D0%94%D0%97_20_f2b_1.png)
+
+ ![fail2ban.log_2](/Lesson_20/%D0%94%D0%97_20_f2b_2.png)
+
+ Брутфорс при помощи Hydra до начала работы fail2ban и после начала работы fail2ban
+
+ ![Hydra до](/Lesson_20/%D0%94%D0%97_20_h_1.png)
+
+ ![Hydra после](/Lesson_20/%D0%94%D0%97_20_h_2.png)
+
+ Брутфорс при помощи Medusa до начала работы fail2ban и после начала работы fail2ban
+
+ ![Medusa до](/Lesson_20/%D0%94%D0%97_20_m_1.png)
+
+ ![Medusa после](/Lesson_20/%D0%94%D0%97_20_m_2.png)
+
+</details>
