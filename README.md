@@ -1095,30 +1095,27 @@ ___
 > Scanner OpenVAS
 ___
 
- [Мануал установки и настройки Suricata (стр. 23-39)](/Lesson_20/20_SZI.pdf)
+ [Установка OpenVAS Docker compose](https://greenbone.github.io/docs/latest/22.4/container/index.html#)
 
- [Git с правилами на детектирование разных режимов работы сетевого сканера nmap](https://github.com/aleksibovellan/opnsense-suricata-nmaps)
+ [Установка OpenVAS способом компиляции](https://greenbone.github.io/docs/latest/22.4/source-build/index.html)
 
- Конфиг suricata (/etc/suricata/suricata.yaml)
+ [Готовый образ OpenVAS](https://www.greenbone.net/en/greenbone-free/#toggle-id-1)
 
- ![suricata.yaml_1](/Lesson_20/%D0%94%D0%97_20_yaml_1.png)
-
- ![suricata.yaml_2](/Lesson_20/%D0%94%D0%97_20_yaml_2.png)
-
- Кастомные правила для определения работы nmap
-
- ![local.rules](/Lesson_20/%D0%94%D0%97_20_rules_1.png)
-
- Лог сработки правила (/var/log/suricata/fast.log)
-
- ![local.rules](/Lesson_20/%D0%94%D0%97_20_log_1.png)
-
+ [Мануал по работе с OpenVAS](https://habr.com/ru/articles/203766/)
  
+ ![Сканирование](/Lesson_22/ДЗ_22_1.png)
+
+ ![Уязвимость](/Lesson_22/ДЗ_22_2.png)
+ 
+ Для устранения данной уязвимости достаточно обновить версию ssh.
+
 ___
 > Зарегистрироваться на opencve.io
 ___
  
+ ![OpenCVE_1](/Lesson_22/ДЗ_22_3.png)
 
+ ![УOpenCVE_2](/Lesson_22/ДЗ_22_4.png)
 ___
 > Установить PatrOwl
 ___
