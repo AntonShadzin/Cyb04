@@ -1111,11 +1111,17 @@ ___
  
  Устранение данной уязвимости:
   Програмное решение: 
+
       - обновить версию ssh
+
   Административное решение:
+
        - вход только по сертификату
+
        - вход только с разрешенных хостов
+
        - отключить SSH
+       
        - двухфакторная аутентификация
 
 
@@ -1132,7 +1138,7 @@ ___
 
  [Мануал по запуску docker версии Partowl ](https://github.com/Patrowl/PatrowlDocs/blob/master/installation/installation-guide.md)
 
- ![PatrOwl](/Lesson_22/ДЗ_22_4.png)
+ ![PatrOwl](/Lesson_22/ДЗ_22_6.png)
 
 </details>
 
