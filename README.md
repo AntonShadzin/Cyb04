@@ -1097,17 +1097,27 @@ ___
 
  [Установка OpenVAS Docker compose](https://greenbone.github.io/docs/latest/22.4/container/index.html#)
 
- [Установка OpenVAS способом компиляции](https://greenbone.github.io/docs/latest/22.4/source-build/index.html)
+ [Установка OpenVAS способом компиляции (неполучилось нормально скомпилировать)](https://greenbone.github.io/docs/latest/22.4/source-build/index.html)
 
  [Готовый образ OpenVAS](https://www.greenbone.net/en/greenbone-free/#toggle-id-1)
 
  [Мануал по работе с OpenVAS](https://habr.com/ru/articles/203766/)
  
- ![Сканирование](/Lesson_22/ДЗ_22_1.png)
+ ![Сканирование_1](/Lesson_22/ДЗ_22_1.png)
+
+ ![Сканирование_2](/Lesson_22/ДЗ_22_5.png)
 
  ![Уязвимость](/Lesson_22/ДЗ_22_2.png)
  
- Для устранения данной уязвимости достаточно обновить версию ssh.
+ Устранение данной уязвимости:
+  Програмное решение: 
+      - обновить версию ssh
+  Административное решение:
+       - вход только по сертификату
+       - вход только с разрешенных хостов
+       - отключить SSH
+       - двухфакторная аутентификация
+
 
 ___
 > Зарегистрироваться на opencve.io
@@ -1115,12 +1125,14 @@ ___
  
  ![OpenCVE_1](/Lesson_22/ДЗ_22_3.png)
 
- ![УOpenCVE_2](/Lesson_22/ДЗ_22_4.png)
+ ![OpenCVE_2](/Lesson_22/ДЗ_22_4.png)
 ___
 > Установить PatrOwl
 ___
 
+ [Мануал по запуску docker версии Partowl ](https://github.com/Patrowl/PatrowlDocs/blob/master/installation/installation-guide.md)
 
+ ![PatrOwl](/Lesson_22/ДЗ_22_4.png)
 
 </details>
 
