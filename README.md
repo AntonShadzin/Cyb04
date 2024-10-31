@@ -1172,6 +1172,29 @@ ___
 
 [Мануал по запуску Docker compose ELK](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose)
 
+!Решение проблемы найдено. EFK заработал.
+
+[Официальный мануал](https://docs.fluentd.org/container-deployment/docker-compose)
+
+[Альтернативный мануал](https://www.howtoforge.com/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-ubuntu-22-04/)
+
+Необходимые изменения в Dockerfile fluent 
+
+```docker
+
+FROM fluent/fluentd:v1.14-1
+
+USER root
+
+RUN gem update --system && \
+gem install fluent-plugin-elasticsearch --source http://rubygems.org
+
+```
+
+[Источник решения](https://stackoverflow.com/questions/71120621/efk-system-is-build-on-docker-but-fluentd-cant-start-up)
+
+![Результат](/Lesson_23/ДЗ_23_elk.png)
+
 ___
 > Установка SIEM Wazuh с помощью docker-compose
 ___
