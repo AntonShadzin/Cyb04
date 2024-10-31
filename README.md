@@ -1172,6 +1172,8 @@ ___
 
 [Мануал по запуску Docker compose ELK](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose)
 
+![Результат](/Lesson_23/ДЗ_23_2.png)
+
 !Решение проблемы найдено. EFK заработал.
 
 [Официальный мануал](https://docs.fluentd.org/container-deployment/docker-compose)
