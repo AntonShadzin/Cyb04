@@ -1168,6 +1168,10 @@ ___
   - различные конфиги установки (как из обычных мануалов, так и из сгенерированных AI)
   - различные docker image (как официальные fluent, так и кастомные под ELK стэк)
 
+Вместо EFK был развернут ELK 
+
+[Мануал по запуску Docker compose ELK](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose)
+
 ___
 > Установка SIEM Wazuh с помощью docker-compose
 ___
