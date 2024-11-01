@@ -1176,9 +1176,7 @@ ___
 
 !Решение проблемы найдено. EFK заработал.
 
-[Официальный мануал](https://docs.fluentd.org/container-deployment/docker-compose)
-
-[Альтернативный мануал](https://www.howtoforge.com/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-ubuntu-22-04/)
+[Мануал](https://www.howtoforge.com/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-ubuntu-22-04/)
 
 Необходимые изменения в Dockerfile fluent 
 
