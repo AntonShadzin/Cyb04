@@ -310,7 +310,7 @@ ___
 
 </details>
 
-<details><summary>Занятие №6 Типы атак, OWASP top 10</summary>
+<details><summary>Занятие №7 Типы атак, OWASP top 10</summary>
 
 ___
 > Изучить SQL запросы.
