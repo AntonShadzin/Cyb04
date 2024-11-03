@@ -1206,3 +1206,31 @@ ___
 ![Wazuh](/Lesson_23/ДЗ_23_Wazuh.png)
 
 </details>
+
+
+
+<details><summary>Занятие №24-25 Forensics, Incident response </summary>
+
+___
+> Изучить основные виды HTTP methods and requests
+___
+
+ [Основные виды HTTP methods and requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+
+ ___
+> Установить volatility на ubuntu
+___
+ 
+ AVML необходим для создания файла дампа памяти. Volatility для работы с файлом дампа памяти.
+
+ [Мануал Volatility+AVML](https://docs.google.com/document/d/1v7u6HVrae1R4fCCs1SNAGryjy5tmJCPDKq2Hyhqd9Fo/edit?pli=1&tab=t.0)
+
+ [Мануал по получению таблицы символов на Ubuntu](https://www.iblue.team/memory-forensics-1/volatility-plugins/build-custom-linux-profile-for-volatility)
+
+ !Важно. Скопировать полученный json файл необходимо в /путь к папке/volatility3/volatility3/symbols/linux/ папки linux по умолчанию нет, ее надо создать. То есть в клонированном репозитории необходимо зайти в одноименную папку volatility3 и уже в ней искать папку symbols.
+
+ ![Результат](/Lesson_24_25/ДЗ_25_vol.png)
+
+</details>
+
+
