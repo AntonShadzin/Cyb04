@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+RED='\e[31m'
+GREEN='\e[32m'
+BLUE='\e[34m'
+RESET='\e[0m'
+
+echo -e "$BLUE Welcome to install Volatility3 $RESET"
+sudo apt-get update >/dev/null
+
+if dpkg -l python3-full >/dev/null
+then echo -e "$GREEN Already installed python3-full $RESET"
+else sudo apt-get install -y pyton3-full
+fi
+
+if dpkg -l python3-pip >/dev/null
+then echo -e "$GREEN Already installed python3-pip $RESET"
+else sudo apt-get install -y pyton3-pip
+fi
+
+if dpkg -l wget >/dev/null
+then echo -e "$GREEN Already installed wget $RESET"
+else sudo apt-get install -y wget 
+fi
+
+if dpkg -l git >/dev/null
+then echo -e "$GREEN Already installed git $RESET"
+else sudo apt-get install -y git 
+fi
+
+if dpkg -l golang-go >/dev/null
+then echo -e "$GREEN Already installed golang-go $RESET"
+else sudo apt-get install -y golang-go 
+fi
+
+PS3='Select system for install volatility3: '
+sys=("Ubuntu" "Debian" "Exit")
+select fav in "${sys[@]}"; do
+    case $fav in
+        "Ubuntu")
+            echo -e  "$GREEN Install volatility3 for ubuntu $RESET"
+	    ~/ubuntu
+            break
+            ;;
+        "Debian")
+            echo -e "$GREEN Install volatility3 for ubuntu $RESET"
+	    ~/debian
+            break
+            ;;
+	"Exit")
+	    echo -e "$RED User requested exit $RESET"
+	    exit 0
+	    ;;
+        *) echo -e "$RED invalid option $REPLY $RESET";;
+    esac
+done

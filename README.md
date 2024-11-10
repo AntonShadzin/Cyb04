@@ -1185,3 +1185,368 @@ ___
 </details>
 
 
+<details><summary>Занятие №26 Scripting pt.1 </summary>
+
+___
+> Написать красочный интерактивный bash-script для автоматизации ваших часто повторяемых действий 
+___
+
+Был написан скрипт не установку и запуск volatility3 с возможностью выбора системы Ubuntu или Debian.
+
+[Main](/Lesson_26/main)
+
+[Ubuntu](/Lesson_26/ubuntu)
+
+[Debian](/Lesson_26/debian)
+
+Скрипты размещаются в домашнюю директорию пользователя (~) и запускаются из нее же.
+
+Main - обновляет систему; проверяет наличие и устанавливает в случае необходимости приложения wget, python, git; дает возможность выбора варианта установки volatility в зависимости от системы.
+
+Ubuntu - устанавиливает avml, dwarf2json, volatility3; снимает дамп памяти; создает символьную таблицу и размещает ее внутри директории volotility3; дает возможность выбрать модуль первого сканирования дампа памяти.
+
+Debian - устанавиливает avml, dwarf2json, volatility3; снимает дамп памяти; создает символьную таблицу и размещает ее внутри директории volotility3; дает возможность выбрать модуль первого сканирования дампа памяти.
+
+Main
+``` bash
+
+#!/usr/bin/env bash
+
+RED='\e[31m'
+GREEN='\e[32m'
+BLUE='\e[34m'
+RESET='\e[0m'
+
+echo -e "$BLUE Welcome to install Volatility3 $RESET"
+sudo apt-get update >/dev/null
+
+if dpkg -l python3-full >/dev/null
+then echo -e "$GREEN Already installed python3-full $RESET"
+else sudo apt-get install -y pyton3-full
+fi
+
+if dpkg -l python3-pip >/dev/null
+then echo -e "$GREEN Already installed python3-pip $RESET"
+else sudo apt-get install -y pyton3-pip
+fi
+
+if dpkg -l wget >/dev/null
+then echo -e "$GREEN Already installed wget $RESET"
+else sudo apt-get install -y wget 
+fi
+
+if dpkg -l git >/dev/null
+then echo -e "$GREEN Already installed git $RESET"
+else sudo apt-get install -y git 
+fi
+
+if dpkg -l golang-go >/dev/null
+then echo -e "$GREEN Already installed golang-go $RESET"
+else sudo apt-get install -y golang-go 
+fi
+
+PS3='Select system for install volatility3: '
+sys=("Ubuntu" "Debian" "Exit")
+select fav in "${sys[@]}"; do
+    case $fav in
+        "Ubuntu")
+            echo -e  "$GREEN Install volatility3 for ubuntu $RESET"
+	    ~/ubuntu
+            break
+            ;;
+        "Debian")
+            echo -e "$GREEN Install volatility3 for ubuntu $RESET"
+	    ~/debian
+            break
+            ;;
+	"Exit")
+	    echo -e "$RED User requested exit $RESET"
+	    exit 0
+	    ;;
+        *) echo -e "$RED invalid option $REPLY $RESET";;
+    esac
+done
+
+```
+
+Debian
+```bash 
+
+#!/usr/bin/env bash
+
+RED='\e[31m'
+GREEN='\e[32m'
+BLUE='\e[34m'
+RESET='\e[0m'
+
+
+cd ~ 
+
+echo -e "$GREEN Download the latest release of avml $RESET"
+
+wget https://github.com/microsoft/avml/releases/download/v0.14.0/avml
+
+echo -e "$GREEN Make the file executable $RESET"
+
+sudo chmod +x avml
+
+
+echo -e "$GREEN Move the executable to a directory in /usr/local/bin $RESET"
+
+sudo mv avml /usr/local/bin/
+
+if avml --help >/dev/null
+then echo -e "$GREEN AVML is installed $RESET"
+else echo -e "$RED AVML is not installed $RESET" && exit 0
+fi
+
+echo -e "$GREEN Create memory dump $RESET" 
+
+sudo avml ~/memory.dmp
+sudo chown $USER:$USER memory.dmp
+sudo chmod 755 memory.dmp
+
+
+echo -e "$GREEN Install Volatility3 $RESET"
+
+git clone https://github.com/volatilityfoundation/volatility3.git
+cd volatility3
+
+echo -e "$GREEN Install Volatility3 requirements $RESET"
+
+
+pip3 install -r requirements-minimal.txt
+pip3 install -r requirements.txt
+
+echo -e "$GREEN Install the corresponding debug symbols $RESET"
+
+sudo tee /etc/apt/sources.list.d/debug.list << EOF
+deb http://deb.debian.org/debian-debug/ $(lsb_release -cs)-debug main
+deb http://deb.debian.org/debian-debug/ $(lsb_release -cs)-proposed-updates-debug main
+EOF
+
+sudo apt update
+sudo apt install --yes linux-image-$(uname -r)-dbg
+
+
+echo -e "$GREEN Instal dwarf2json $RESET"
+cd 
+git clone https://github.com/volatilityfoundation/dwarf2json.git
+cd dwarf2json
+go build
+sudo cp dwarf2json /usr/local/bin/
+
+if dwarf2json --help >/dev/null
+then echo -e "$GREEN dwarf2json is installed $RESET"
+else echo -e "$RED dwarf2json is not installed $RESET" && exit 0
+fi
+
+cd /usr/lib/debug/boot/
+chmod 755 vmlinux-$(uname -r)
+chown $USER:$USER vmlinux-$(uname -r)
+sudo mkdir ~/volatility3/volatility3/symbols/linux
+sudo dwarf2json linux  --elf /usr/lib/debug/boot/vmlinux-$(uname -r) --system-map /boot/System.map-$(uname -r) > Debian-$(uname -r).json
+sudo cp ~/Debian-$(uname -r).json ~/volatility3/volatility3/symbols/linux/
+cd ~/volatility3
+
+PS3='Select module for volatility3: '
+sys=("Lsof" "Pstree" "Bash" "Check_creds" "Exit")
+select fav in "${sys[@]}"; do
+    case $fav in
+        "Lsof")
+            echo -e  "$GREEN Lists open files for each processes $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.lsof.Lsof
+            break
+            ;;
+         "Pstree")
+            echo -e  "$GREEN Plugin for listing processes in a tree based on their parent process ID $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.pstree.PsTree
+            break
+            ;;
+        "Bash")
+            echo -e  "$GREEN Recovers bash command history from memory $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.bash.Bash
+            break
+            ;;
+        "Check_creds")
+            echo -e  "$GREEN Lists open files for each processes $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.check_creds.Check_creds
+            break
+            ;;
+        "Exit")
+            echo -e "$RED User requested exit $RESET"
+            exit 0
+            ;;
+             *) echo -e "$RED invalid option $REPLY $RESET";;
+    esac
+done
+
+```
+
+Ubuntu
+```bash 
+
+#!/usr/bin/env bash
+
+RED='\e[31m'
+GREEN='\e[32m'
+BLUE='\e[34m'
+RESET='\e[0m'
+
+cd 
+
+echo -e "$GREEN Download the latest release of avml $RESET"
+
+wget https://github.com/microsoft/avml/releases/download/v0.14.0/avml
+
+echo -e "$GREEN Make the file executable $RESET"
+
+sudo chmod +x avml
+
+
+echo -e "$GREEN Move the executable to a directory in /usr/local/bin $RESET"
+
+sudo mv avml /usr/local/bin/
+
+if avml --help >/dev/null
+then echo -e "$GREEN AVML is installed $RESET"
+else echo -e "$RED AVML is not installed $RESET" && exit 0
+fi
+
+echo -e "$GREEN Create memory dump $RESET" 
+
+sudo avml ~/memory.dmp
+sudo chown $USER:$USER memory.dmp
+sudo chmod 755 memory.dmp
+
+
+echo -e "$GREEN Install Volatility3 $RESET"
+
+git clone https://github.com/volatilityfoundation/volatility3.git
+cd volatility3
+
+echo -e "$GREEN Install Volatility3 requirements $RESET"
+
+
+pip3 install -r requirements-minimal.txt
+pip3 install -r requirements.txt
+
+echo -e "$GREEN Install the corresponding debug symbols $RESET"
+
+release=$(lsb_release -cs)
+
+sudo tee /etc/apt/sources.list.d/ddebs.list <<EOF
+
+deb http://ddebs.ubuntu.com $release main restricted universe multiverse
+deb http://ddebs.ubuntu.com $release-updates main restricted universe multiverse
+deb http://ddebs.ubuntu.com $release-proposed main restricted universe multiverse
+
+
+EOF
+
+wget -O - http://ddebs.ubuntu.com/dbgsym-release-key.asc | sudo apt-key add -
+
+
+sudo apt update
+sudo apt install linux-image-$(uname -r)-dbgsym
+
+# Debug kernel is at: /usr/lib/debug/boot/vmlinux-$(uname -r)
+echo -e "$GREEN Instal dwarf2json $RESET"
+cd 
+git clone https://github.com/volatilityfoundation/dwarf2json.git
+cd dwarf2json
+go build
+sudo cp dwarf2json /usr/local/bin/
+if dwarf2json --help >/dev/null
+then echo -e "$GREEN dwarf2json is installed $RESET"
+else echo -e "$RED dwarf2json is not installed $RESET" && exit 0
+fi
+
+
+cd /usr/lib/debug/boot/
+chmod 755 vmlinux-$(uname -r)
+chown $USER:$USER vmlinux-$(uname -r)
+sudo mkdir ~/volatility3/volatility3/symbols/linux
+sudo dwarf2json linux  --elf /usr/lib/debug/boot/vmlinux-$(uname -r) --system-map /boot/System.map-$(uname -r) > ~/Ubuntu-$(uname -r).json
+sudo cp ~/Ubuntu-$(uname -r).json ~/volatility3/volatility3/symbols/linux/
+cd ~/volatility3
+
+PS3='Select module for volatility3: '
+sys=("Lsof" "Pstree" "Bash" "Check_creds" "Exit")
+select fav in "${sys[@]}"; do
+    case $fav in
+        "Lsof")
+            echo -e  "$GREEN Lists open files for each processes $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.lsof.Lsof
+            break
+            ;;
+         "Pstree")
+            echo -e  "$GREEN Plugin for listing processes in a tree based on their parent process ID $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.pstree.PsTree
+            break
+            ;;
+        "Bash")
+            echo -e  "$GREEN Recovers bash command history from memory $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.bash.Bash
+            break
+            ;;
+        "Check_creds")
+            echo -e  "$GREEN Lists open files for each processes $RESET"
+            sudo python3 vol.py -f ~/memory.dmp linux.check_creds.Check_creds
+            break
+            ;;
+        "Exit")
+            echo -e "$RED User requested exit $RESET"
+            exit 0
+            ;;
+             *) echo -e "$RED invalid option $REPLY $RESET";;
+    esac
+done
+
+```
+ 
+ __
+> Написать powershell-script
+___
+ 
+Скрипт. который подключается по протоколу SMB к виртуальным машинам и копирует отфильтрованные журналы в одно место для анализа, передачи или сохранения.
+
+```powershell
+
+#массив с именами хостов, с которых необходимо снять лог-файлы.
+ 
+$files = 'PROGRAMMERS-01', 'PROGRAMMERS-03', 'PROGRAMMERS-04', 'PROGRAMMERS-05', 'PROGRAMMERS-06', 'PROGRAMMERS-07', 'PROGRAMMERS-08', 'PROGRAMMERS-09', 'PROGRAMMERS-10', 'PROGRAMMERS-11', 'PROGRAMMERS-12', 'PROGRAMMERS-13', 'PROGRAMMERS-14', 'PROGRAMMERS-15', 'PROGRAMMERS-16', 'PROGRAMMERS-17', 'PROGRAMMERS-18'
+ 
+#рекурсивная функция, которая подставляет значения из массива.
+#wevtutil - функция для работы с журналами событий windows. epl - команда для экспорта системных логов. system - название журнала, который необходимо экспортировать
+#\\$file\c$\$file.evtx - путь куда экспортируются лог-файл. По неизвестной мне причине скрипт работает только если сохранять лог локально на ту систему с которой снимаются логи.
+#/r - параметр, который отвечает за то, чтобы команда отрабатывала на удаленном хосте.
+#/q - фильтр запроса.
+ 
+foreach ($file in $files) {
+ 
+wevtutil epl system \\$file\c$\$file.evtx /r:$file /q:*[System[EventID=7045]]
+ 
+}
+ 
+
+$sourceFilePath = "c$"
+$destinationFolderPath = "c$\test"
+ 
+foreach ($file in $files) {
+    $sourceFullPath = "\\$file\c$\$file.evtx"
+    $destinationFullPath = "\\rakovskaja-13\$destinationFolderPath\$file.evtx"
+    Copy-Item -Path $sourceFullPath -Destination $destinationFullPath
+}  
+ 
+ 
+foreach ($file in $files) {
+Remove-Item -Path "\\$file\C$\$file.evtx"
+ 
+}
+
+```
+
+</details>
+
+
