@@ -1341,6 +1341,12 @@ then echo -e "$GREEN dwarf2json is installed $RESET"
 else echo -e "$RED dwarf2json is not installed $RESET" && exit 0
 fi
 
+echo -e "$GREEN Increase swap space $RESET"
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
 cd /usr/lib/debug/boot/
 chmod 755 vmlinux-$(uname -r)
 chown $USER:$USER vmlinux-$(uname -r)
