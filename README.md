@@ -1623,6 +1623,9 @@ longitude = 27.5667  # Долгота Минска
 print(get_weather_forecast(latitude, longitude))
 
 ```
+
+![Результат](/Lesson_27/ДЗ_27_1.png)
+
 ___
 >	Расписать действия данного powershell
 ___
