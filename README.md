@@ -1511,7 +1511,7 @@ done
 
 ```
  
- __
+___
 > Написать powershell-script
 ___
  
