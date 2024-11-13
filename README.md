@@ -1570,7 +1570,7 @@ Python скрипт для получения информации о погод
 ```pyton
 
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone 
 
 def get_weather_forecast(latitude, longitude, past_days=10):
     base_url = "https://api.open-meteo.com/v1/forecast"
@@ -1591,7 +1591,7 @@ def get_weather_forecast(latitude, longitude, past_days=10):
 
 def process_weather_data(data):
     hourly_data = data['hourly']
-    current_time = datetime.utcnow()
+    current_time = datetime.now(timezone.utc)
     
     # Находим индекс текущего времени
     time_index = hourly_data['time'].index(current_time.strftime("%Y-%m-%dT%H:00"))
