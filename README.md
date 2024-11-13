@@ -1362,22 +1362,22 @@ select fav in "${sys[@]}"; do
         "Lsof")
             echo -e  "$GREEN Lists open files for each processes $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.lsof.Lsof
-            break
+           
             ;;
          "Pstree")
             echo -e  "$GREEN Plugin for listing processes in a tree based on their parent process ID $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.pstree.PsTree
-            break
+            
             ;;
         "Bash")
             echo -e  "$GREEN Recovers bash command history from memory $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.bash.Bash
-            break
+           
             ;;
         "Check_creds")
             echo -e  "$GREEN Lists open files for each processes $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.check_creds.Check_creds
-            break
+            
             ;;
         "Exit")
             echo -e "$RED User requested exit $RESET"
@@ -1484,22 +1484,22 @@ select fav in "${sys[@]}"; do
         "Lsof")
             echo -e  "$GREEN Lists open files for each processes $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.lsof.Lsof
-            break
+           
             ;;
          "Pstree")
             echo -e  "$GREEN Plugin for listing processes in a tree based on their parent process ID $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.pstree.PsTree
-            break
+            
             ;;
         "Bash")
             echo -e  "$GREEN Recovers bash command history from memory $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.bash.Bash
-            break
+            
             ;;
         "Check_creds")
             echo -e  "$GREEN Lists open files for each processes $RESET"
             sudo python3 vol.py -f ~/memory.dmp linux.check_creds.Check_creds
-            break
+            
             ;;
         "Exit")
             echo -e "$RED User requested exit $RESET"
