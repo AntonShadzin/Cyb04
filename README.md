@@ -1723,3 +1723,29 @@ $IV=$DatA[0…3]; $datA=$DATa[4…$datA.lengT H];
 Этот скрипт представляет собой сложную вредоносную программу, предназначенную для обхода систем безопасности, загрузки и выполнения дополнительного кода с удаленного сервера. Он использует различные методы обфускации и техники обхода защиты, что делает его крайне опасным.
 
 </details>
+
+
+
+<details><summary>Занятие №28 Coding  pt. 1 </summary>
+
+___
+> Ознакомиться с основными ресурсами по безопасной разработке
+___
+
+[NIST 800-218 Secure Software Development
+Framework](https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-218.pdf)
+
+[OWASP Developer Guide](https://owasp.org/www-project-developer-guide/assets/exports/OWASP_Developer_Guide.pdf)
+
+[Top 25 Software Errors](https://www.sans.org/top25-software-errors/)
+
+___
+> Установить SSDEEP на Linux
+___
+
+[Мануал по установке и работе с SSdeep](https://ssdeep-project.github.io/ssdeep/usage.html)
+
+![ssdeep](/Lesson_28/ДЗ_28_1.png)
+
+</details>
+
