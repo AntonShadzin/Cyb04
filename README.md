@@ -1749,3 +1749,768 @@ ___
 
 </details>
 
+
+
+<details><summary>Занятие №29 Coding  pt. 2 </summary>
+
+___
+> Ознакомится с информацией и написать скрипты на bash и python для проверки паролей и др
+___
+
+Python скрипт для проверки пароля из готового списка
+
+[Password_check](/Lesson_29/password_check.py)
+
+```python
+
+import re
+
+GREEN="\033[32m"
+PURPLE="\033[35m"
+RED="\033[31m"
+RESET="\033[0m"
+
+
+
+
+def check_password(password):
+    errors = []
+
+    # Проверка длины пароля
+    if not 12 <= len(password) <= 24:
+        errors.append("Длина пароля должна быть от 12 до 24 символов")
+    
+    # Проверка на наличие только английских букв, цифр и символов
+    if not re.match(r'^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:\'",.<>?]+$', password):
+        errors.append("Пароль должен содержать только английские буквы, цифры и специальные символы")
+    
+    # Проверка на наличие хотя бы одной строчной буквы
+    if not re.search(r'[a-z]', password):
+        errors.append("Пароль должен содержать хотя бы одну строчную букву")
+    
+    # Проверка на наличие хотя бы одной заглавной буквы
+    if not re.search(r'[A-Z]', password):
+        errors.append("Пароль должен содержать хотя бы одну заглавную букву")
+    
+    # Проверка на наличие хотя бы одной цифры
+    if not re.search(r'\d', password):
+        errors.append("Пароль должен содержать хотя бы одну цифру")
+    
+    # Проверка на наличие хотя бы одного специального символа
+    if not re.search(r'[!@#$%^&*()_+\-=\[\]{};:\'",.<>?]', password):
+        errors.append("Пароль должен содержать хотя бы один специальный символ")
+    
+    return errors
+
+# Пример использования
+passwords = [
+    "abcABC123!@#",  # Правильный пароль
+    "short",         # Слишком короткий
+    "nouppercase123!",  # Нет заглавной буквы
+    "NOLOWERCASE123!",  # Нет строчной буквы
+    "NoDigits!@#",   # Нет цифры
+    "NoSpecialChar123",  # Нет специального символа
+    "ValidPassword123!",  # Правильный пароль
+    "русскиеБуквы123!", # Содержит не английские буквы
+]
+
+for password in passwords:
+    errors = check_password(password)
+    if not errors:
+        print(f"{GREEN}Пароль '{password}' соответствует всем требованиям.{RESET}")
+    else:
+        print(f"{RED}Пароль '{password}' не соответствует следующим требованиям:{RESET}")
+        for error in errors:
+            print(f"{PURPLE}- {error}{RESET}")
+    print()  # Пустая строка для разделения результатов
+
+```
+
+Python скрипт для проверки пароля с интерактивным вводом
+
+[Password_check_2](/Lesson_29/password_check2.py)
+
+```python
+
+import re
+
+
+
+
+def check_password(password):
+    errors = []
+
+    # Проверка длины пароля
+    if not 12 <= len(password) <= 24:
+        errors.append("Длина пароля должна быть от 12 до 24 символов")
+    
+    # Проверка на наличие только английских букв, цифр и символов
+    if not re.match(r'^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:\'",.<>?]+$', password):
+        errors.append("Пароль должен содержать только английские буквы, цифры и специальные символы")
+    
+    # Проверка на наличие хотя бы одной строчной буквы
+    if not re.search(r'[a-z]', password):
+        errors.append("Пароль должен содержать хотя бы одну строчную букву")
+    
+    # Проверка на наличие хотя бы одной заглавной буквы
+    if not re.search(r'[A-Z]', password):
+        errors.append("Пароль должен содержать хотя бы одну заглавную букву")
+    
+    # Проверка на наличие хотя бы одной цифры
+    if not re.search(r'\d', password):
+        errors.append("Пароль должен содержать хотя бы одну цифру")
+    
+    # Проверка на наличие хотя бы одного специального символа
+    if not re.search(r'[!@#$%^&*()_+\-=\[\]{};:\'",.<>?]', password):
+        errors.append("Пароль должен содержать хотя бы один специальный символ")
+    
+    return errors
+
+def main():
+
+    GREEN="\033[32m"
+    PURPLE="\033[35m"
+    RED="\033[31m"
+    BLUE="\033[34m"
+    RESET="\033[0m"
+
+    print(f"{BLUE}Программа проверки пароля{RESET}\n\n")
+    print(f"{BLUE}Требования к паролю:{RESET}\n")
+    print(f"{BLUE}- Длина от 12 до 24 символов{RESET}")
+    print(f"{BLUE}- Только английские буквы, цифры и специальные символы{RESET}")
+    print(f"{BLUE}- Минимум 1 строчная буква, 1 заглавная буква, 1 цифра и 1 специальный символ{RESET}\n\n")
+
+
+    while True:
+        password = input(f"Введите пароль для проверки (или {RED}'exit'{RESET} для завершения): ")
+        
+        if password.lower() == 'exit':
+            print(f"{RED}Программа завершена.{RESET}")
+            break
+
+        errors = check_password(password)
+        
+        if not errors:
+            print(f"{GREEN}Пароль соответствует всем требованиям!{RESET}")
+        else:
+            print(f"{RED}Пароль не соответствует следующим требованиям:{RESET}")
+            for error in errors:
+                print(f"{PURPLE}- {error}{RESET}")
+        
+        print()  # Пустая строка для разделения результатов
+
+if __name__ == "__main__":
+    main()
+
+```
+
+Bash скрипт для проверки пароля из готового списка
+
+[Password_check_bash](/Lesson_29/bash_password_check_2.sh)
+
+```bash
+
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+RESET='\033[0m'
+
+
+check_password() {
+    local password=$1
+    local errors=()
+
+    # Проверка длины пароля
+    if [[ ${#password} -lt 12 || ${#password} -gt 24 ]]; then
+        errors+=("Длина пароля должна быть от 12 до 24 символов")
+    fi
+
+    # Проверка на наличие только английских букв, цифр и символов
+    if [[ ! $password =~ ^[a-zA-Z0-9]+$ ]]; then
+        errors+=("Пароль должен содержать только английские буквы и цифры")
+    fi
+
+    # Проверка на наличие хотя бы одной строчной буквы
+    if [[ ! $password =~ [a-z] ]]; then
+        errors+=("Пароль должен содержать хотя бы одну строчную букву")
+    fi
+
+    # Проверка на наличие хотя бы одной заглавной буквы
+    if [[ ! $password =~ [A-Z] ]]; then
+        errors+=("Пароль должен содержать хотя бы одну заглавную букву")
+    fi
+
+    # Проверка на наличие хотя бы одной цифры
+    if [[ ! $password =~ [0-9] ]]; then
+        errors+=("Пароль должен содержать хотя бы одну цифру")
+    fi
+
+    # Возвращаем результат
+    if [ ${#errors[@]} -eq 0 ]; then
+        echo -e "${GREEN}Пароль '$password' соответствует всем требованиям.${RESET}"
+    else
+        echo -e "${RED}Пароль '$password' не соответствует следующим требованиям:${RESET}"
+        for error in "${errors[@]}"; do
+            echo -e "${PURPLE}- $error${RESET}"
+        done
+    fi
+    echo
+}
+
+# Список паролей для проверки
+passwords=(
+    "abcefABCEF123"
+    "short"
+    "nouppercase123"
+    "NOLOWERCASE123"
+    "NoDigits"
+    "WithSpecialChar123!"
+    "ValidPasswordYes123"
+    "русскиеБуквы123"
+)
+
+# Проверка каждого пароля
+for password in "${passwords[@]}"; do
+    check_password "$password"
+done
+
+```
+
+Bash скрипт для проверки пароля с интерактивным вводом
+
+[Password_check_bash_2](/Lesson_29/bash_password_check_3.sh)
+
+```bash
+
+#!/bin/bash
+
+GREEN='\033[0;32m'
+PURPLE='\033[0;35m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+RESET='\033[0m'
+
+
+check_password() {
+    local password=$1
+    local errors=()
+
+    # Проверка длины пароля
+    if [[ ${#password} -lt 12 || ${#password} -gt 24 ]]; then
+        errors+=("Длина пароля должна быть от 12 до 24 символов")
+    fi
+
+    # Проверка на наличие только английских букв, цифр и символов
+    if [[ ! $password =~ ^[a-zA-Z0-9]+$ ]]; then
+        errors+=("Пароль должен содержать только английские буквы и цифры")
+    fi
+
+    # Проверка на наличие хотя бы одной строчной буквы
+    if [[ ! $password =~ [a-z] ]]; then
+        errors+=("Пароль должен содержать хотя бы одну строчную букву")
+    fi
+
+    # Проверка на наличие хотя бы одной заглавной буквы
+    if [[ ! $password =~ [A-Z] ]]; then
+        errors+=("Пароль должен содержать хотя бы одну заглавную букву")
+    fi
+
+    # Проверка на наличие хотя бы одной цифры
+    if [[ ! $password =~ [0-9] ]]; then
+        errors+=("Пароль должен содержать хотя бы одну цифру")
+    fi
+
+
+    # Вывод ошибок
+    if [ ${#errors[@]} -eq 0 ]; then
+        echo -e "${GREEN}Пароль соответствует всем требованиям!${RESET}"
+    else
+        echo -e "${RED}Пароль не соответствует следующим требованиям:${RESET}\n"
+        for error in "${errors[@]}"; do
+            echo -e "${PURPLE}- $error${RESET}"
+        done
+    fi
+}
+
+echo -e "${BLUE}Программа проверки пароля${RESET}\n"
+echo -e "${BLUE}Требования к паролю:\n${RESET}"
+echo -e "${BLUE}- Длина от 12 до 24 символов${RESET}"
+echo -e "${BLUE}- Только английские буквы, цифры и специальные символы${RESET}"
+echo -e "${BLUE}- Минимум 1 строчная буква, 1 заглавная буква и 1 цифра${RESET}"
+echo
+
+while true; do
+    read -p  "Введите пароль для проверки (или 'exit' для завершения): " password
+    
+    if [[ ${password,,} == "exit" ]]; then
+        echo "${RED}Программа завершена.${RESET}"
+        break
+    fi
+
+    check_password "$password"
+    echo
+done
+
+```
+
+Python скрипт для проверки белорусского номера телефона из готового списка
+
+[Phone_check](/Lesson_29/phone_check.py)
+
+```python
+
+import re
+
+GREEN="\033[32m"
+RED="\033[31m"
+RESET="\033[0m"
+
+def validate_belarus_phone(phone_number):
+    # Паттерн для белорусских номеров
+    pattern = r'^(\+375|375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$'
+    
+    # Удаляем все не-цифровые символы из номера
+    cleaned_number = re.sub(r'\D', '', phone_number)
+    
+    # Проверяем соответствие паттерну
+    match = re.match(pattern, cleaned_number)
+    
+    if match:
+        return True
+    else:
+        return False
+
+# Примеры использования
+test_numbers = [
+    '+375291234567',
+    '375331234567',
+    '80251234567',
+    '+375 44 123 45 67',
+    '8029-123-45-67',
+    '+7 495 123 45 67',  # Российский номер
+    '12345678'  # Неверный формат
+]
+
+for number in test_numbers:
+    if validate_belarus_phone(number):
+        print(f"{GREEN}{number} - действительный белорусский номер{RESET}")
+    else:
+        print(f"{RED}{number} - недействительный белорусский номер{RESET}")
+
+```
+
+Python скрипт для проверки белорусского номера телефона с интерактивным вводом
+
+[Phone_check_2](/Lesson_29/phone_check2.py)
+
+```python
+
+import re
+
+GREEN="\033[32m"
+RED="\033[31m"
+CYAN="\033[36m"
+RESET="\033[0m"
+
+def validate_belarus_phone(phone_number):
+    # Паттерн для белорусских номеров
+    pattern = r'^(\+375|375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$'
+    
+    # Удаляем все не-цифровые символы из номера
+    cleaned_number = re.sub(r'\D', '', phone_number)
+    
+    # Проверяем соответствие паттерну
+    match = re.match(pattern, cleaned_number)
+    
+    return bool(match)
+
+def main():
+    print(f"{CYAN}Проверка белорусских телефонных номеров{RESET}\n")
+    print(f"Для выхода введите {RED}'exit'{RESET}")
+    
+    while True:
+        phone_number = input("\nВведите номер телефона для проверки: ").strip()
+        if phone_number.lower() in ['exit']:
+            print(f"{RED}Программа завершена.{RESET}")
+            break
+        
+        if validate_belarus_phone(phone_number):
+            print(f"{GREEN}{phone_number} - действительный белорусский номер{RESET}")
+        else:
+            print(f"{RED}{phone_number} - недействительный белорусский номер{RESET}")
+        
+        print(f"\n{CYAN}Примеры правильного формата{RESET}")
+        print(f"{CYAN}+375 29 123 45 67{RESET}")
+        print(f"{CYAN}80291234567{RESET}")
+        print(f"{CYAN}375 33 1234567{RESET}")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+Bash скрипт для проверки белорусского номера телефона из готового списка
+
+[Phone_check_bash](/Lesson_29/bash_phone_check_2.sh)
+
+```bash
+
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+RESET='\033[0m'
+
+
+validate_belarus_phone() {
+    local phone_number=$1
+    # Удаляем все не-цифровые символы из номера
+    cleaned_number=$(echo "$phone_number" | sed 's/[^0-9]//g')
+    
+    # Проверяем соответствие паттерну
+    if [[ $cleaned_number =~ ^(375|80)(29|25|44|33)[0-9]{7}$ ]]; then
+        return 0 # Действительный номер
+    else
+        return 1 # Недействительный номер
+    fi
+}
+
+# Список тестовых номеров
+test_numbers=(
+    "+375291234567"
+    "375331234567"
+    "8 (025) 123 45 67"
+    "+375 44 123 45 67"
+    "8029-123-45-67"
+    "+7 495 123 45 67"
+    "12345678"
+)
+
+for number in "${test_numbers[@]}"; do
+    if validate_belarus_phone "$number"; then
+        echo -e "${GREEN}$number - действительный белорусский номер${RESET}"
+    else
+        echo -e "${RED}$number - недействительный белорусский номер${RESET}"
+    fi
+done
+
+```
+
+Bash скрипт для проверки белорусского номера телефона с интерактивным вводом
+
+[Phone_check_bash_2](/Lesson_29/bash_phone_check_3.sh)
+
+```bash
+
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+RESET='\033[0m'
+
+
+
+validate_belarus_phone() {
+    local phone_number=$1
+    # Удаляем все не-цифровые символы из номера
+    cleaned_number=$(echo "$phone_number" | sed 's/[^0-9]//g')
+    
+    # Проверяем соответствие паттерну
+    if [[ $cleaned_number =~ ^(375|80)(29|25|44|33)[0-9]{7}$ ]]; then
+        return 0 # Действительный номер
+    else
+        return 1 # Недействительный номер
+    fi
+}
+
+echo -e "${BLUE}Проверка белорусских телефонных номеров${RESET}\n"
+echo -e "Для выхода введите ${RED}'exit'${RESET}"
+
+while true; do
+    echo
+    read -p "Введите номер телефона для проверки: " phone_number
+    
+    if [[ ${phone_number,,} == "exit" ]]; then
+        echo -e "${RED}Программа завершена.${RESET}"
+        break
+    fi
+    
+    if validate_belarus_phone "$phone_number"; then
+        echo -e "${GREEN}$phone_number - действительный белорусский номер${RESET}"
+    else
+        echo -e "${RED}$phone_number - недействительный белорусский номер${RESET}"
+    fi
+    
+    echo
+    echo -e "${BLUE}Примеры правильного формата:${RESET}"
+    echo -e "${BLUE}+375 29 123 45 67${RESET}"
+    echo -e "${BLUE}80291234567${RESET}"
+    echo -e "${BLUE}375 33 1234567${RESET}"
+done
+
+```
+
+Python скрипт для роверки email
+
+```python
+
+import re
+import dns.resolver
+import socket
+
+GREEN="\033[32m"
+RED="\033[31m"
+CYAN="\033[36m"
+RESET="\033[0m"
+
+
+
+def validate_email(email):
+    # Базовый паттерн для проверки email
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    if not re.match(pattern, email):
+        return False, "Некорректный формат email-адреса"
+    
+    # Проверка длины email
+    if len(email) > 254:
+        return False, "Email слишком длинный"
+    
+    # Проверка длины локальной части (до @)
+    local_part = email.split('@')[0]
+    if len(local_part) > 64:
+        return False, "Локальная часть email слишком длинная"
+    
+    # Проверка на наличие последовательных точек
+    if '..' in email:
+        return False, "Email содержит последовательные точки"
+    
+    # Проверка домена
+    domain = email.split('@')[1]
+    try:
+        # Проверка MX-записи домена
+        mx_records = dns.resolver.resolve(domain, 'MX')
+        if not mx_records:
+            return False, "Домен не имеет MX-записей"
+        
+        # Проверка A-записи домена
+        socket.gethostbyname(domain)
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, socket.gaierror):
+        return False, "Домен не существует или недоступен"
+    
+    return True, "Email-адрес корректен"
+
+def main():
+    print(f"{CYAN}Проверка email-адресов{RESET}\n")
+    print(f"Для выхода введите {RED}'exit'{RESET}")
+    
+    while True:
+        email = input("\nВведите email для проверки: ").strip()
+        
+        if email.lower() in ['exit']:
+            print(f"{RED}Программа завершена.{RESET}")
+            break
+        
+        is_valid, message = validate_email(email)
+        if is_valid:
+            print(f"{email} - {GREEN}{message}{RESET}")
+        else:
+            print(f"{email} - {RED}некорректный email-адрес: {CYAN}{message}{RESET}")
+        
+        print(f"{CYAN}\nПримеры правильного формата:{RESET}")
+        print(f"{CYAN}user@example.com{RESET}")
+        print(f"{CYAN}name.surname@domain.co.uk{RESET}")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+Python скрипт для проверки email-адреса с интерактивным вводом
+
+[Email_check](/Lesson_29/email_check2.py)
+
+```python
+
+import re
+import dns.resolver
+import socket
+
+GREEN="\033[32m"
+RED="\033[31m"
+CYAN="\033[36m"
+RESET="\033[0m"
+
+
+
+def validate_email(email):
+    # Базовый паттерн для проверки email
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    if not re.match(pattern, email):
+        return False, "Некорректный формат email-адреса"
+    
+    # Проверка длины email
+    if len(email) > 254:
+        return False, "Email слишком длинный"
+    
+    # Проверка длины локальной части (до @)
+    local_part = email.split('@')[0]
+    if len(local_part) > 64:
+        return False, "Локальная часть email слишком длинная"
+    
+    # Проверка на наличие последовательных точек
+    if '..' in email:
+        return False, "Email содержит последовательные точки"
+    
+    # Проверка домена
+    domain = email.split('@')[1]
+    try:
+        # Проверка MX-записи домена
+        mx_records = dns.resolver.resolve(domain, 'MX')
+        if not mx_records:
+            return False, "Домен не имеет MX-записей"
+        
+        # Проверка A-записи домена
+        socket.gethostbyname(domain)
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, socket.gaierror):
+        return False, "Домен не существует или недоступен"
+    
+    return True, "Email-адрес корректен"
+
+def main():
+    print(f"{CYAN}Проверка email-адресов{RESET}\n")
+    print(f"Для выхода введите {RED}'exit'{RESET}")
+    
+    while True:
+        email = input("\nВведите email для проверки: ").strip()
+        
+        if email.lower() in ['exit']:
+            print(f"{RED}Программа завершена.{RESET}")
+            break
+        
+        is_valid, message = validate_email(email)
+        if is_valid:
+            print(f"{email} - {GREEN}{message}{RESET}")
+        else:
+            print(f"{email} - {RED}некорректный email-адрес: {CYAN}{message}{RESET}")
+        
+        print(f"{CYAN}\nПримеры правильного формата:{RESET}")
+        print(f"{CYAN}user@example.com{RESET}")
+        print(f"{CYAN}name.surname@domain.co.uk{RESET}")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+Bash скрипт для проверки email-адреса с интерактивным вводом
+
+[Email_check_bash](/Lesson_29/bash_email_check_3.sh)
+
+```bash
+
+#!/bin/bash
+
+GREEN='\033[0;32m'
+CYAN='\033[0;36m' 
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+RESET='\033[0m'
+
+
+validate_email() {
+    local email="$1"
+    
+    # Базовая проверка формата email
+    if ! echo "$email" | grep -E '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' >/dev/null 2>&1; then
+        echo "Некорректный формат email-адреса"
+        return 1
+    fi
+    
+    # Проверка длины email
+    if [ ${#email} -gt 254 ]; then
+        echo "Email слишком длинный"
+        return 1
+    fi
+    
+    # Проверка длины локальной части
+    local local_part="${email%%@*}"
+    if [ ${#local_part} -gt 64 ]; then
+        echo "Локальная часть email слишком длинная"
+        return 1
+    fi
+    
+    # Проверка на последовательные точки
+    if echo "$email" | grep -E '\.\.' >/dev/null 2>&1; then
+        echo "Email содержит последовательные точки"
+        return 1
+    fi
+    
+    # Проверка домена
+    local domain="${email#*@}"
+    
+    # Проверка MX-записи
+    if ! dig +short MX "$domain" | grep -E '^[0-9]+ [a-zA-Z0-9.-]+\.$' >/dev/null 2>&1; then
+        echo "Домен не имеет действительных MX-записей"
+        return 1
+    fi
+    
+    # Проверка A-записи
+    if ! dig +short A "$domain" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' >/dev/null 2>&1; then
+        echo "Домен не имеет действительных A-записей"
+        return 1
+    fi
+    
+    echo "Email-адрес корректен"
+    return 0
+}
+
+main() {
+    echo -e "${CYAN}Проверка email-адресов${RESET}\n"
+    echo -e "${CYAN}Для выхода введите ${RED}'exit'${RESET}"
+    
+    while true; do
+        echo
+        read -p "Введите email для проверки: " email
+        
+        if [[ "${email,,}" == "exit" ]]; then
+            echo -e "${RED}Программа завершена.${RESET}"
+            break
+        fi
+        
+        result=$(validate_email "$email")
+        status=$?
+        
+        if [ $status -eq 0 ]; then
+            echo -e "${GREEN}$email - $result${RESET}"
+        else
+            echo -e "$email ${RED}- некорректный email-адрес: ${PURPLE}$result${RESET}"
+        fi
+        
+        echo
+        echo -e "${CYAN}Примеры правильного формата:${RESET}"
+        echo -e "${CYAN}user@example.com${RESET}"
+        echo -e "${CYAN}name.surname@domain.co.uk${RESET}"
+    done
+}
+
+main
+
+```
+
+___
+> BASE64
+___
+
+```base64
+JgBjAGgAYwBwAC4AYwBvAG0AIAA2ADUAMAAwADEAIAA+ACAAJABuAHUAbABsAAoAJABlAHgAZQBjAF8AdwByAGEAcABwAGUAcgBfAHMAdAByACAAPQAgACQAaQBuAHAAdQB0ACAAfAAgAE8AdQB0AC0AUwB0AHIAaQBuAGcACgAkAHMAcABsAGkAdABfAHAAYQByAHQAcwAgAD0AIAAkAGUAeABlAGMAXwB3AHIAYQBwAHAAZQByAF8AcwB0AHIALgBTAHAAbABpAHQAKABAACgAIgBgADAAYAAwAGAAMABgADAAIgApACwAIAAyACwAIABbAFMAdAByAGkAbgBnAFMAcABsAGkAdABPAHAAdABpAG8AbgBzAF0AOgA6AFIAZQBtAG8AdgBlAEUAbQBwAHQAeQBFAG4AdAByAGkAZQBzACkACgBJAGYAIAAoAC0AbgBvAHQAIAAkAHMAcABsAGkAdABfAHAAYQByAHQAcwAuAEwAZQBuAGcAdABoACAALQBlAHEAIAAyACkAIAB7ACAAdABoAHIAbwB3ACAAIgBpAG4AdgBhAGwAaQBkACAAcABhAHkAbABvAGEAZAAiACAAfQAKAFMAZQB0AC0AVgBhAHIAaQBhAGIAbABlACAALQBOAGEAbQBlACAAagBzAG8AbgBfAHIAYQB3ACAALQBWAGEAbAB1AGUAIAAkAHMAcABsAGkAdABfAHAAYQByAHQAcwBbADEAXQAKACQAZQB4AGUAYwBfAHcAcgBhAHAAcABlAHIAIAA9ACAAWwBTAGMAcgBpAHAAdABCAGwAbwBjAGsAXQA6ADoAQwByAGUAYQB0AGUAKAAkAHMAcABsAGkAdABfAHAAYQByAHQAcwBbADAAXQApAAoAJgAkAGUAeABlAGMAXwB3AHIAYQBwAHAAZQByAA=
+```
+
+![Decode_base64](/Lesson_29/ДЗ_29_1.png)
+
+
+</details>
