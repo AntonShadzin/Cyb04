@@ -2438,3 +2438,33 @@ JgBjAGgAYwBwAC4AYwBvAG0AIAA2ADUAMAAwADEAIAA+ACAAJABuAHUAbABsAAoAJABlAHgAZQBjAF8A
 
 
 </details>
+
+
+details><summary>Занятие №30 Web Application Security </summary>
+
+___
+> Установить WAF (nginx + Modsecurity)
+___
+
+Задание выполненов в уроке № 19
+
+Повторил на Ubuntu серверной версии.
+
+![Normal_curl](/Lesson_30/ДЗ_30_1.png)
+
+![Error_curl](/Lesson_30/ДЗ_30_3.png)
+
+___
+> Разверните [Готовая виртуалка Ubuntu + modesecurity](https://drive.usercontent.google.com/download?id=12tO5SwSu43IJprim8BafCmF-aQb9-EfM&export=download&authuser=0)
+___
+
+⦁	Настройте сетевой адаптер в режиме моста (Сетевой мост/Network Bridge)
+⦁	Проверьте ip адрес виртуальной машины
+⦁	Запустите контейнер с уязвимым приложением.
+⦁	sudo docker run -d -p 8080:80 saurav7055/xvwa
+⦁	Теперь приложение доступно по адресу {ip сервера}:80/xvwa по всей вашей домашней сети, если нет ограничений файервола.
+⦁	Вызовите 5 различных сработок WAF Правила, применяя уязвимости в приложении
+⦁	Пришлите результат сработки, правило WAF и его ID (var/log/nginx/error.log)
+
+
+</details>
