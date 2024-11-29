@@ -2440,7 +2440,7 @@ JgBjAGgAYwBwAC4AYwBvAG0AIAA2ADUAMAAwADEAIAA+ACAAJABuAHUAbABsAAoAJABlAHgAZQBjAF8A
 </details>
 
 
-details><summary>Занятие №30 Web Application Security </summary>
+<details><summary>Занятие №30 Web Application Security </summary>
 
 ___
 > Установить WAF (nginx + Modsecurity)
