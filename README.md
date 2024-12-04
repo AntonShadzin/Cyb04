@@ -2572,3 +2572,28 @@ sudo docker run -d -p 8080:80 saurav7055/xvwa
 ![waf_5](/Lesson_30/ДЗ_30_5_6.png)
 
 </details>
+
+
+<details><summary>Занятие №31-32 DevSecOps </summary>
+
+___
+> Ознакомиться с основными ресурсами по DevSecOps
+___
+
+[Уязвимости Pypi Library](https://www.opennet.ru/opennews/art.shtml?num=55565)
+
+[Основные этапы DevSecOps](https://habr.com/ru/companies/yandex_cloud_and_infra/articles/738192/)
+
+___
+> Написать тестовый пайплайн по статье с хабра
+___
+
+[Мануал по созданию тестового пайплайна](https://spacelift.io/blog/gitlab-ci-yml)
+
+![pipeline](/Lesson_31-32/ДЗ_31_vscode.png)
+
+![pipeline](/Lesson_31-32/ДЗ_31_pipe2.png)
+
+![pipeline](/Lesson_31-32/)
+
+</details>
