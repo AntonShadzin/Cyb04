@@ -2597,3 +2597,26 @@ ___
 ![pipeline](/Lesson_31-32/)
 
 </details>
+
+
+<details><summary>Занятие №33 Reverse Engineering </summary>
+
+___
+> Ознакомиться с основными ресурсами по Reverse Engin
+___
+
+[Active Directory Pentest Roadmap](https://orange-cyberdefense.github.io/ocd-mindmaps/img/pentest_ad_dark_2022_11.svg)
+
+[Malware bazaar](https://bazaar.abuse.ch/browse/)
+
+___
+> Проанализировать malware crackme.exe
+___
+
+[Crack_me manual](https://fatihhcelik.github.io/posts/The-First-CrackMe-of-The-Series-CrackMe1/)
+
+![Crack_me_1](/Lesson_33/ДЗ_33_1.png)
+
+![Crack_me_2](/Lesson_33/ДЗ_33_2.png)
+
+</details>
