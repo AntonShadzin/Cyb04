@@ -2705,11 +2705,81 @@ ___
 
 [Тренировочный полигон](https://www.cobaltstrike.com)
 
+[The Penetration Testing Execution Standard Documentation](https://readthedocs.org/projects/pentest-standard/downloads/pdf/latest/)
+
+[The Open Source Security Testing Methodology Manual](https://www.isecom.org/OSSTMM.3.pdf)
+
+[NIST SP 800-115 Technical Guide to Information Security Testing and Assessment](https://csrc.nist.gov/pubs/sp/800/115/final)
+
+[OWASP Penetration Testing Methodologies](https://owasp.org/www-project-web-security-testing-guide/latest/3-The_OWASP_Testing_Framework/1-Penetration_Testing_Methodologies)
+
+[BSI – Study a Penetration Testing Mode](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/Studies/Penetration/penetration_pdf.pdf?__blob=publicationFile&v=1)
+
+
+
 ___
 > Скачать вирутальную машину и получить флаг vulnix  *root
 ___
 
+1. Запуск ВМ vulnix
+    Так как образ ВМ vulnix создан на базе платформы VMWare просто так запустить образ на Virtualbox не получится. Для этого необходимо создать любую ВМ и в настройках привязать жесткий диск.
 
+2. Самостоятельная работа
+    Для получения IP-адреса ВМ vulnix был применены инструменты nmap и legion
+
+    ![Legion_1](/Lesson_35-36/ДЗ_35_3_1.png)
+
+    ![Legion_2](/Lesson_35-36/ДЗ_35_3_2.png)
+
+    Были обнаружены: ssh-server, nfs-server, почтовые службы, finger.
+
+    Также legion произвел сканирование на наличие уязвимостей. В дополнению к этому была применен эксплоит smtp для получения всех пользователей, зарегистрированных сервисом.
+
+    ![Legion_3](/Lesson_35-36/ДЗ_35_4.png)
+
+    ![Legion_4](/Lesson_35-36/ДЗ_35_5.png) 
+
+    Используя список найденных уязвимостей были попытки их эксплуатации с помощью Metasploit framework. Результатов данные действия не принесли никаких, кроме опыта работы с данным фрэймворком.
+
+    ![Metasploit](/Lesson_35-36/ДЗ_35_6.png)
+
+    Был примонтирован nfs диск командой. По содержимому я понял, что это домашняя директория пользователя vulnix. Однако в саму директорию попасть я не смог.
+
+    ```bash 
+    sudo mkdir /tmp/nfs
+    sudo mount -t nfs 54.55.56.21:/ /tmp/nfs 
+    ```
+
+    Параллельно был запущен брутфорс данной ВМ с коротким словарем пар логин/пароль и длинными. Короткий дал результаты в виде пары user/letmein. Большой все еще продалжает работу
+
+    ![Brute](/Lesson_35-36/ДЗ_35_1.png)
+
+    После чего используя логин User я подключился к ВМ по ssh. И посмотрел uid и gid пользователя vulnix, чтобы попасть в его домашнюю директорию через nfs диск.
+
+    После того, как я создал пользователя (uid 2008, gid 2008) мои идеи по дальнейшему взлому закончились и я обратился к гайду.
+
+3. Взлом по гайду
+    Вот три основных гайда на которые я опирался:
+
+    [Мануал_1](https://sevenlayers.com/index.php/107-vulnhub-vulnix-walkthrough)
+
+    [Мануал_2](https://medium.com/@dasagreeva/hacklab-vulnix-walkthrough-ff8c6414766d)
+
+    [Мануал_3](https://www.abatchy.com/2016/10/walkthrough-vulnix-vulnhub-vm)
+
+    ![Результат](/Lesson_35-36/ДЗ_35_2.png)
+
+4. Проблемы
+
+    Долго не мог подключится к ВМ по SSH при помощи rsa-ключа так как поменял права на доступ к домашней директории с 711 на 777 (ssh проверяет права доступа у всех директорих и самого ключа и если что-то отличается от стандартных, он выдает ошибку и блокирует подключение при помощи ключа).
+
+    Для выполнения задания достаточно было в файле /etc/exports прописать строку /   *(rw,no_root_squash). /etc/exports является конфигурационным файлом nfs сервера и прописав такой параметр при монтировании nfs-шары мы получали бы рутовы права на всю машину.
+    
+    Однако я решил сделать соответственно как было показано в гайде 3 и запустить оболочку bash с правами root при подключении по ssh (то есть повысить привелегии пользователя vulnix). У меня не получилось сделать ни как в гайде 1 ни как в гайде 3, так как при попытке запустить bash либо sh выдавало ошибку о невозможности выполнения бинарного файла. У меня получилось выполнить запуск bash только при подключении корневого каталога с правами администратора и копирования /bin/bash на самой ВМ vulnix в домашнюю директорю пользователя и расширения прав запуска
+
+    ```bash
+    chmod 4777 /home/vulnix/bash
+    ```
 
 ___
 > Скачать dump сети и найти флаг, прислать скрин флага (пароль: teachmeskills, ищем image)
