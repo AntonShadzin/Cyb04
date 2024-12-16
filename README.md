@@ -2803,6 +2803,18 @@ ___
 
 ![1](/Lesson_35-36/ДЗ_35.bmp)
 
+___
+> Работа с Metasploit
+___
+
+![Nmap](/Lesson_35-36/ДЗ_35_mt_1.png)
+
+Повышение привелегий через /etc/sudoers
+
+![Sudo-user](/Lesson_35-36/ДЗ_35_mt_2.png)
+
+![Root](/Lesson_35-36/ДЗ_35_mt_3.png)
+
 </details>
 
 
