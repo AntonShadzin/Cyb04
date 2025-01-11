@@ -2840,3 +2840,16 @@ ___
 
 </details>
 
+<details><summary>Занятие №38 Рынок Кибербеза</summary>
+
+___
+>  Пройти 20 уровеней [https://overthewire.org/wargames/natas/](https://overthewire.org/wargames/natas/)
+___
+
+Пройдено 20 уровней natas. Крайне сложные CTF для меня. Связваны  с web-security. Самостоятельно получилось решить 4 уровня, остальные только по мануалам. Данные CTF настолько непростые, что даже с использованием гайдов не всегда получалось получить флаг.
+
+![natas21](/Lesson_38/21.jpg)
+
+</details>
+
+<details><summary>Занятие №2 Virtualbox</summary>
